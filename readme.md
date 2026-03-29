@@ -34,8 +34,8 @@ assignment_details/    # PDF and slides for the assignment
 | Allowed | Used | Package | Purpose |
 |---------|------|---------|---------|
 | Y | N | numpy | Numerical computing — arrays, matrix operations, math functions |
-| Y | N | pandas | Data manipulation — DataFrames, loading/cleaning tabular data (CSV, Excel) |
-| Y | N | matplotlib | Low-level plotting library — line charts, histograms, custom visualizations |
+| Y | Y | pandas | Data manipulation — DataFrames, loading/cleaning tabular data (CSV, Excel) |
+| Y | Y | matplotlib | Low-level plotting library — line charts, histograms, custom visualizations |
 | Y | N | seaborn | High-level statistical plots built on matplotlib — heatmaps, distributions, correlation plots |
 | Y | N | scikit-learn | Classical ML — classifiers, regressors, preprocessing, cross-validation, metrics |
 | Y | Y | torch | Deep learning framework by Meta (PyTorch) — flexible neural network research & training |
