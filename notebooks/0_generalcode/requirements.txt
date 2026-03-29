@@ -2,7 +2,6 @@
 os
 sys
 pathlib
-tqdm
 
 # used
 torch
