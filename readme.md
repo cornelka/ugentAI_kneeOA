@@ -32,7 +32,8 @@ assignment_details/    # PDF and slides for the assignment
 
 ## Project packages
 | Allowed | Used | Package | Purpose |
-| Y | N | numpy	| Numerical computing — arrays, matrix operations, math functions |
+|---------|------|---------|---------|
+| Y | N | numpy | Numerical computing — arrays, matrix operations, math functions |
 | Y | N | pandas | Data manipulation — DataFrames, loading/cleaning tabular data (CSV, Excel) |
 | Y | N | matplotlib | Low-level plotting library — line charts, histograms, custom visualizations |
 | Y | N | seaborn | High-level statistical plots built on matplotlib — heatmaps, distributions, correlation plots |
