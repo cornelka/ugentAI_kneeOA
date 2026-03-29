@@ -32,10 +32,7 @@ assignment_details/    # PDF and slides for the assignment
 
 ## Project packages
 | Allowed | Used | Package | Purpose |
-<<<<<<< HEAD
 |---------|------|---------|---------|
-=======
->>>>>>> b6a24fac1f4152a617a7c2035da2988319f70c5f
 | Y | N | numpy | Numerical computing — arrays, matrix operations, math functions |
 | Y | N | pandas | Data manipulation — DataFrames, loading/cleaning tabular data (CSV, Excel) |
 | Y | N | matplotlib | Low-level plotting library — line charts, histograms, custom visualizations |
