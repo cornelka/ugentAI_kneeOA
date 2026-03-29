@@ -1,0 +1,21 @@
+# extra
+os
+sys
+pathlib
+tqdm
+
+# used
+torch
+scikeras
+Pillow
+pandas
+matplotlib
+
+#unused
+numpy
+seaborn
+scikit-learn
+scipy
+imbalanced-learn
+requests
+tensorboard
