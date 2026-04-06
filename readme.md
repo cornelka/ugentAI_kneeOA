@@ -48,6 +48,7 @@ assignment_details/    # PDF and slides for the assignment
 | N | Y | os | interacts with the operating system |
 | N | Y | sys | interacts with the Python interpreter itself |
 | N | Y | pathlib | interacts with the filesystem (different operating systems) |
+| N | Y | shutil | interacts with the shell |
 
 ## Workflow & Task Dependencies
 
