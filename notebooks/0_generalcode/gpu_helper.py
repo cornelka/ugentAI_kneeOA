@@ -6,9 +6,17 @@ import torch
 def settest_torch_gpu():
     os.environ["KERAS_BACKEND"] = "torch"  # only needed if not set globally
 
-    # Check PyTorch CUDA
-    print(f"PyTorch CUDA available: {torch.cuda.is_available()}")
-    print(f"GPU: {torch.cuda.get_device_name(0)}")
+    # Check available device: CUDA, MPS (Apple Silicon), or CPU
+    if torch.cuda.is_available():
+        device = "cuda"
+        print("PyTorch CUDA available: True")
+        print(f"GPU: {torch.cuda.get_device_name(0)}")
+    elif torch.backends.mps.is_available():
+        device = "mps"
+        print("PyTorch MPS (Apple Silicon) available: True")
+    else:
+        device = "cpu"
+        print("No GPU found — running on CPU")
 
     # Check Keras sees the GPU
     print(f"Keras backend: {keras.backend.backend()}")
@@ -26,5 +34,7 @@ def settest_torch_gpu():
     x = np.random.rand(100, 32).astype("float32")
     y = model.predict(x[:5])
     print(
-        f"Prediction shape: {y.shape}  — Keras is running on {keras.backend.backend()}"
+        f"Prediction shape: {y.shape}  — Keras is running on {keras.backend.backend()} , device: {device}"
     )
+
+    return device

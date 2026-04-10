@@ -1,7 +1,7 @@
 # extra
-os
-sys
-pathlib
+#os
+#sys
+#pathlib
 
 # used
 torch
@@ -9,6 +9,7 @@ scikeras
 Pillow
 pandas
 matplotlib
+tensorflow
 
 #unused
 numpy
