@@ -8,6 +8,10 @@ g_train_std = 0.1950
 
 
 def MyToTensor(img, channels: int = 1):
+    """
+    Use MyToTensor for online resize and to_tensor (no normalisation)
+    - channels gets a default value = 1; but we could also use 3 to fill the RGB with the same gray values
+    """
     tens = transforms.Compose(
         [
             transforms.Grayscale(num_output_channels=channels),
@@ -25,6 +29,12 @@ def MyToTensor(img, channels: int = 1):
 def MyPreprocess(
     img, channels: int = 1, tr_mean: float = g_train_main, tr_std: float = g_train_std
 ):
+    """
+    Use Mypreprocess for online resize, to_tensor and normalization applied every validation or inference
+    - channels gets a default value = 1; but we could also use 3 to fill the RGB with the same gray values
+    - tr_mean normalisation value gets the mean value found in the preprocessing step as a default
+    - tr_std normalisation value gets the std value found in the preprocessing step as a default
+    """
     # Val/test: resize + normalize only — no augmentation
     preproc = transforms.Compose(
         [
@@ -44,7 +54,13 @@ def MyPreprocess(
 def MyTransform(
     img, channels: int = 1, tr_mean: float = g_train_main, tr_std: float = g_train_std
 ):
-    # Training: online augmentation applied every epoch before normalization
+    """
+    Use MyTransform for online augmentation, resizing, to_tensor and normalization applied every epoch during training
+    - channels gets a default value = 1; but we could also use 3 to fill the RGB with the same gray values
+    - tr_mean normalisation value gets the mean value found in the preprocessing step as a default
+    - tr_std normalisation value gets the std value found in the preprocessing step as a default
+    """
+
     transf = transforms.Compose(
         [
             transforms.Grayscale(num_output_channels=channels),
