@@ -1,0 +1,172 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+% ---------- LOGO ----------
+\AddToShipoutPictureBG*{
+    \AtPageUpperLeft{
+        \hspace{0.5cm}
+        \raisebox{-3.0cm}{
+            \includegraphics[width=4cm]{ugent.png}
+        }
+    }
+}
+
+% ---------- TITLE ----------
+\title{Project 1: Deep Learning}
+\maketitle
+
+% ---------- AUTHORS ----------
+\author{
+\IEEEauthorblockN{
+Student Name 1, Student Name 2, Student Name 3, Student Name 4
+}
+\IEEEauthorblockA{
+Group Number: XX \\
+
+}
+}
+
+
+
+% ---------- SECTIONS ----------
+\section{Introduction}
+
+
+\section{Methods}
+
+\subsection{Dataset}
+
+The KneeOA dataset consists of 1{,}055 grayscale knee X-ray images distributed across
+three splits: 750 training, 159 validation, and 146 test images.
+Each image is a $224 \times 224$ pixel PNG in single-channel (grayscale) format.
+The binary label indicates the presence (1) or absence (0) of knee osteoarthritis (OA).
+
+The class distribution is consistent across splits: approximately 67\% healthy (class~0)
+and 33\% OA (class~1), yielding a minority-class ratio of roughly 1:2.
+Filenames encode a patient identifier and laterality (e.g.\ \texttt{9069761R.png}),
+indicating left or right knee.
+Of the 1{,}055 images, 334 patient IDs appear twice, corresponding to both knees of the
+same patient being included.
+A cross-split leakage check confirmed that no patient ID appears in more than one split,
+so the train/val/test partitions are patient-disjoint.
+
+Pixel intensity statistics reveal variation in brightness across the dataset.
+The global training-set mean is approximately 155 out of 255, with a standard deviation
+of roughly 50 (in 8-bit range).
+Per-image brightness (mean pixel value) varies substantially between images
+($\sigma \approx 26$ across training images), as does contrast (per-image pixel standard
+deviation, $\sigma \approx 15$).
+
+\subsection{Classification Challenges}
+
+Several intrinsic characteristics of the dataset complicate the classification task.
+
+\textbf{Class imbalance.}
+The 2:1 healthy-to-OA ratio introduces a risk of the model optimising for the majority
+class. A standard cross-entropy loss would permit high accuracy while systematically
+missing OA cases. Because false negatives carry clinical cost (missed diagnosis),
+we address this by using a weighted loss function and monitoring F1-score and recall on
+class~1 rather than overall accuracy.
+
+\textbf{Image variability.}
+Visual inspection reveals considerable variation in exposure (brightness) and contrast
+across images. Some images appear notably darker or lighter than the dataset average.
+This variation is not diagnostic and may confound the classifier, motivating contrast
+and brightness augmentation.
+
+\textbf{Laterality.}
+The dataset contains both left and right knee images. Left and right knees are mirror
+images of each other; the OA label is unaffected by side. Horizontal flipping is
+therefore clinically valid as an augmentation, unlike domains (e.g.\ chest X-rays) where
+laterality carries diagnostic information.
+
+\textbf{Foreign objects.}
+A manual inspection identified 15 images containing surgical hardware (screws, plates)
+or film markers. These objects are distributed across both classes and all splits.
+Their influence on the classifier cannot be determined at the preprocessing stage;
+they are retained in the dataset and flagged for post-hoc analysis of misclassified
+cases.
+
+\subsection{Image Handling}
+
+\textbf{Downsampling.}
+All images are resized from $224 \times 224$ to $128 \times 128$ pixels using Bilinear
+resampling with antialiasing. This is recommended for downscaling high-quality
+images~\cite{Torchvision}.
+The resolution reduction lowers memory and compute requirements for subsequent tasks
+at an acceptable loss of fine-grained detail.
+
+\textbf{Normalization.}
+Images are normalized using the global mean and standard deviation computed over all
+pixels in the training set (mean $\approx 0.607$, std $\approx 0.194$ on the $[0,1]$
+scale after \texttt{ToTensor}).
+This choice is preferred over fixed values (e.g.\ $\mu=0.5$, $\sigma=0.5$) because it
+reflects the actual data distribution, and over per-sample normalization because that
+would destroy genuine brightness differences between images that may carry diagnostic
+signal.
+Validation and test images are normalized with the \emph{training} statistics to avoid
+any form of data leakage.
+
+\textbf{Augmentation.}
+Data augmentation is applied \emph{online} during training: each batch is augmented
+on-the-fly by the \texttt{DataLoader}, producing a new random variant of each image
+every epoch. This provides greater variety than a fixed set of pre-generated augmented
+copies, avoiding overfitting.
+3 augmentation operations are applied sequentially before resizing. These variate the
+geometry of the XRAY image, and simulate variation in patient positioning.
+\begin{itemize}
+  \item \textbf{Random horizontal flip} (p\,=\,0.5): clinically valid because left and
+        right knees are mirror images; doubles the effective dataset size.
+  \item \textbf{Random affine rotation} ($\pm 5^\circ$): simulates small patient
+        positioning differences; kept small to avoid unrealistic joint orientations.
+  \item \textbf{Random affine translation} ($\pm 3^\circ$): also simulates small patient
+        positioning differences; kept small to avoid unrealistic joint orientations.
+\end{itemize}
+2 augmentation operations are applied sequentially after resizing. These variate the
+pixel intensities and are best applied after an interpolation step (subsampling).
+Interpolation after pixel augmentations might affect realism of the image.
+\begin{itemize}
+  \item \textbf{Color jitter} (brightness $\pm 10\%$, contrast $\pm 15\%$): reflects
+        the observed inter-image exposure variability and encourages the model to learn
+        structure rather than absolute intensity.
+\end{itemize}
+Augmentation is applied exclusively to the training set.
+Validation and test sets are left unmodified so that evaluation metrics provide an
+unbiased estimate of generalisation performance under real-world conditions.
+
+\section{Results \& Discussion}
+
+\section{Conclusion}
+
+\section{Author Contributions}
+
+\section{Use of Generative AI}
+During preprocessing GenAI was used to get familiar with the XRAY domain, it's
+challenges and possible solutions. Code for calculations of image statistics has been
+generated. A draft for this report as well. GenAI has also been used to speed-up syntax
+corrections.
+\begin{thebibliography}{1}
+\bibitem{PIL}
+  Pillow Development Team,
+  \textit{Pillow (PIL Fork) Documentation},
+  \url{https://pillow.readthedocs.io}, 2024.
+\bibitem{Torchvision}
+  Torch Contributors,
+  \textit{Torchvision Documentation},
+  \url{https://docs.pytorch.org/vision/stable/index.html}, 2017.
+\end{thebibliography}
+
+\end{document}
