@@ -13,8 +13,9 @@
 ## preprocessing.ipynb
 - torchvision OK or obliged to use pillow
 - recheck explanations (normalization)
-
--specific options needed for baseline /transfer ?
+- mean + std check met transferlearning + carlo
+- testdata: toepassing mean/std van train op test ?
+- specific options needed for baseline /transfer ?
 
 
 ##  baseline.ipynb
@@ -38,7 +39,7 @@ self.classifier      # final layer
 
 - assignment states to adapt data not the model ; (indicate model adaption alternative and why not used)
 
--dropout-rate (not same as baseline, is ok why)
+- dropout-rate (not same as baseline, is ok why)
 - code is not running, lots of open sections
 
 
