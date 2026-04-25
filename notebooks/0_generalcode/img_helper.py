@@ -38,7 +38,35 @@ def make_image_dataframe(src_path: str) -> pd.DataFrame:
                     }
                 )
 
-    return pd.DataFrame(rows)
+    images_df = pd.DataFrame(rows)
+
+    # additional step to add the information from foreign objects; might be usefull when evaluating classification results.
+    foreign_objects = {
+        ("train/0", "9082640L.png"),
+        ("train/0", "9160026L.png"),
+        ("train/0", "9170536L.png"),
+        ("train/1", "9008322L.png"),
+        ("train/1", "9065272L.png"),
+        ("train/1", "9070442L.png"),
+        ("train/1", "9425996L.png"),
+        ("train/1", "9510943L.png"),
+        ("train/1", "9529676R.png"),
+        ("val/0", "9031141L.png"),
+        ("val/1", "9375300L.png"),
+        ("val/1", "9387265L.png"),
+        ("test/1", "9087632L.png"),
+        ("test/1", "9559547R.png"),
+        ("test/1", "9688649L.png"),
+    }
+
+    images_df["foreign_objects"] = (
+        images_df[["folder", "filename"]]
+        .apply(tuple, axis=1)
+        .isin(foreign_objects)
+        .astype(int)
+    )
+
+    return images_df
 
 
 def resample_xray(im, size=(128, 128)):
