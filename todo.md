@@ -1,24 +1,24 @@
 ## general
-- decide on augmentation steps
+- [OK] decide on augmentation steps
 - decide on model for latent and gradcam
 - cleanup code
 - cleanup unneeded data
-- next meeting(s)
-- do we need more time ?
+- [OK] next meeting(s)
+- [OK] do we need more time ?
 
 - make sure we can run all notebooks end2end repeatedly
 - install instructions ?
 
 
 ## preprocessing.ipynb
-- torchvision OK or obliged to use pillow
-- recheck explanations (normalization)
-- mean + std check met transferlearning + carlo
-- testdata: toepassing mean/std van train op test ?
-- specific options needed for baseline /transfer ?
+- [OK] torchvision OK or obliged to use pillow
+- [] recheck explanations (normalization) / versie in preprop is OK
+- [OK] mean + std check met transferlearning + carlo  / versie in preprop is OK
+- [OK] testdata: toepassing mean/std van train op test ? bereken op train  toepassen op test
+- [OK] specific options needed for baseline /transfer ? / toegevoegd
 
 
-##  baseline.ipynb
+##  baseline.ipynb -> OK in baseline2
 - use online augmentation from preprocessing
 - save model structure + weights for best model
 - label the models structure  (we need this for notebook 4 + 5)
@@ -44,14 +44,14 @@ self.classifier      # final layer
 
 
 ##  latentspace.ipynb
-- open best model instead of code-copy; access latent layer
+- [ok] open best model instead of code-copy; access latent layer
 - rerun and addapt on final best model
 - revisit code and add explanations
 - choose neighbours visualisation
 - clinical interpretations
 
 ##  GradCAM.ipynb
-- open best model instead of code-copy; access cam layer
+- [ok] open best model instead of code-copy; access cam layer
 - rerun and addapt on final best model
 - check the code and logic
 - understand/explain it
