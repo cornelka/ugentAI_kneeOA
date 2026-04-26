@@ -3,8 +3,10 @@ from torchvision import transforms
 g_seed = 42
 
 # normalisation values determined in preprocessing, added here for re-use
-g_train_main = 0.6063
+g_train_mean = 0.6063
 g_train_std = 0.1950
+g_train_no_outliers_mean = 0.6106
+g_train_no_outliers_std = 0.1915
 
 
 def MyToTensor(channels: int = 1, size=(128, 128)):
@@ -31,7 +33,7 @@ def MyToTensor(channels: int = 1, size=(128, 128)):
 def MyPreprocess(
     channels: int = 1,
     size=(128, 128),
-    tr_mean: float = g_train_main,
+    tr_mean: float = g_train_mean,
     tr_std: float = g_train_std,
     centercrop: int = 0,
 ):
@@ -66,7 +68,7 @@ def MyPreprocess(
 def MyTransform(
     channels: int = 1,
     size=(128, 128),
-    tr_mean: float = g_train_main,
+    tr_mean: float = g_train_mean,
     tr_std: float = g_train_std,
     centercrop: int = 0,
 ):

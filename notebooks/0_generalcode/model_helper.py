@@ -95,31 +95,33 @@ class BaselineCNN(nn.Module):
 
     @classmethod
     def load(cls, path, device, dropout_rate=0.5):
-        """
-        Load from a .pth file and return an eval-mode model.
-        Remaps legacy state_dict keys (conv_block / fc_block) to current names.
-        """
+        """Load from a .pth file and return an eval-mode model."""
         model = cls(dropout_rate=dropout_rate).to(device)
+
         sd = torch.load(path, map_location=device)
 
-        legacy = {
-            "conv_block.0": "conv1.0",
-            "conv_block.1": "conv1.1",
-            "conv_block.4": "conv2.0",
-            "conv_block.5": "conv2.1",
-            "conv_block.8": "conv3.0",
-            "conv_block.9": "conv3.1",
-            "fc_block.1": "fc",
-            "fc_block.4": "classifier",
-        }
-        remapped = {}
-        for k, v in sd.items():
-            for old, new in legacy.items():
-                if k.startswith(old):
-                    k = k.replace(old, new, 1)
-                    break
-            remapped[k] = v
+        # legacy key remapping for weights saved before the conv1/conv2/conv3 rename
+        # (conv_block / fc_block → conv1 / conv2 / conv3 / fc / classifier)
+        # keep commented out; uncomment if loading pre-rename .pth files
+        # legacy = {
+        #     "conv_block.0": "conv1.0",
+        #     "conv_block.1": "conv1.1",
+        #     "conv_block.4": "conv2.0",
+        #     "conv_block.5": "conv2.1",
+        #     "conv_block.8": "conv3.0",
+        #     "conv_block.9": "conv3.1",
+        #     "fc_block.1": "fc",
+        #     "fc_block.4": "classifier",
+        # }
+        # remapped = {}
+        # for k, v in sd.items():
+        #     for old, new in legacy.items():
+        #         if k.startswith(old):
+        #             k = k.replace(old, new, 1)
+        #             break
+        #     remapped[k] = v
+        # sd = remapped
 
-        model.load_state_dict(remapped)
+        model.load_state_dict(sd)
         model.eval()
         return model

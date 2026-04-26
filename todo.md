@@ -12,7 +12,7 @@
 
 ## preprocessing.ipynb
 - [OK] torchvision OK or obliged to use pillow
-- [] recheck explanations (normalization) / versie in preprop is OK
+- [OK] recheck explanations (normalization) / versie in preprop is OK
 - [OK] mean + std check met transferlearning + carlo  / versie in preprop is OK
 - [OK] testdata: toepassing mean/std van train op test ? bereken op train  toepassen op test
 - [OK] specific options needed for baseline /transfer ? / toegevoegd
@@ -28,7 +28,7 @@ self.embedding       # latent vector (128-d)
 self.classifier      # final layer
 
 
-##  transferlearning.ipynb
+##  transferlearning.ipynb -> ok in transferlearning2
 - use online augmentation from preprocessing  (same as baseline)
 - save model structure + weights for best model
 - label the models structure  (we need this for notebook 4 + 5) (via hooks)
