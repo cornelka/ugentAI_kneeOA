@@ -55,6 +55,7 @@ def show_images(
     titles: "list | None" = None,
     title="",
     max_cols=5,
+    overlays: "list | None" = None,
 ) -> None:
     """
     Plot dataset images by index.
@@ -64,17 +65,24 @@ def show_images(
 
     Simple mode (titles provided, no prediction arrays):
         shows a plain string label per image — useful for data exploration.
+
+    Overlay mode (overlays provided):
+        each image gets a paired Grad-CAM row directly below it.
     """
     n = len(indices)
     cols = min(n, max_cols)
-    rows = -(-n // cols)
+    n_groups = -(-n // cols)
+    rows = n_groups * 2 if overlays is not None else n_groups
 
     fig, axes = plt.subplots(
         rows, cols, figsize=(4 * cols, 4 * rows), squeeze=False, layout="constrained"
     )
-    axes_flat = axes.flat
 
-    for i, (ax, idx) in enumerate(zip(axes_flat, indices)):
+    for i, idx in enumerate(indices):
+        group, col = divmod(i, cols)
+        top = group * 2 if overlays is not None else group
+
+        ax = axes[top, col]
         img, _ = dataset[idx]
         ax.imshow(img.squeeze(), cmap="gray")
         if all_preds is not None:
@@ -89,93 +97,19 @@ def show_images(
             ax.set_title(titles[i], fontsize=9)
         ax.axis("off")
 
-    for ax in list(axes_flat)[n:]:
-        ax.axis("off")
+        if overlays is not None:
+            ax_bot = axes[top + 1, col]
+            ax_bot.imshow(overlays[i])
+            ax_bot.set_title("Grad-CAM", fontsize=8)
+            ax_bot.axis("off")
 
-    if title:
-        fig.suptitle(title, fontsize=11, fontweight="bold")
-    plt.show()
-
-
-def overlay_heatmap(img_tensor, cam, alpha=0.5) -> np.ndarray:
-    """
-    Blend a Grad-CAM heatmap onto a grayscale image tensor.
-    img_tensor : (1, H, W) float tensor in [0, 1]
-    cam        : (h, w) numpy array in [0, 1]
-    Returns    : (H, W, 3) numpy array ready for imshow
-    """
-    img_np = img_tensor.squeeze().numpy()
-    H, W = img_np.shape
-
-    cam_t = torch.tensor(cam).unsqueeze(0).unsqueeze(0)
-    cam_up = F.interpolate(cam_t, size=(H, W), mode="bilinear", align_corners=False)
-    cam_up = cam_up.squeeze().numpy()
-
-    heatmap = plt.colormaps["jet"](cam_up)[:, :, :3]
-    img_rgb = np.stack([img_np] * 3, axis=-1)
-    return np.clip(alpha * heatmap + (1 - alpha) * img_rgb, 0, 1)
-
-
-def show_gradcam(
-    indices,
-    display_dataset,
-    test_dataset,
-    grad_cam,
-    all_labels,
-    all_preds,
-    all_probs,
-    class_names,
-    device,
-    title="",
-    n=5,
-) -> None:
-    """
-    Plot Grad-CAM results in a 2-row grid: original image (top) + heatmap overlay (bottom).
-    At most n columns. Title colour is green/red for correct/wrong predictions.
-    """
-    count = min(n, len(indices))
-    cols = min(count, 5)
-    n_groups = -(-count // cols)  # number of image/overlay row pairs
-    rows = 2 * n_groups
-
-    fig, axes = plt.subplots(
-        rows,
-        cols,
-        figsize=(3 * cols, 6 * n_groups),
-        squeeze=False,
-        layout="constrained",
-    )
-
-    for i, idx in enumerate(indices[:count]):
-        group = i // cols
-        col = i % cols
-        top = group * 2
-        bot = group * 2 + 1
-
-        img_display, _ = display_dataset[idx]
-        img_tensor, _ = test_dataset[idx]
-        cam = grad_cam.generate(img_tensor.unsqueeze(0).to(device))
-        overlay = overlay_heatmap(img_display, cam)
-
-        true_name = class_names[int(all_labels[idx])]
-        pred_name = class_names[int(all_preds[idx])]
-        color = "green" if all_preds[idx] == all_labels[idx] else "red"
-
-        axes[top, col].imshow(img_display.squeeze(), cmap="gray")
-        axes[top, col].set_title(
-            f"True: {true_name}\nPred: {pred_name} ({all_probs[idx]:.2f})",
-            color=color,
-            fontsize=8,
-        )
+    # hide unused axes in the last row group
+    for j in range(n, n_groups * cols):
+        group, col = divmod(j, cols)
+        top = group * 2 if overlays is not None else group
         axes[top, col].axis("off")
-        axes[bot, col].imshow(overlay)
-        axes[bot, col].set_title("Grad-CAM", fontsize=8)
-        axes[bot, col].axis("off")
-
-    # hide unused axes in the last group
-    for col in range(count % cols if count % cols else cols, cols):
-        axes[-2, col].axis("off")
-        axes[-1, col].axis("off")
+        if overlays is not None:
+            axes[top + 1, col].axis("off")
 
     if title:
         fig.suptitle(title, fontsize=11, fontweight="bold")
