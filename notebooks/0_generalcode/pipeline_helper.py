@@ -1,7 +1,5 @@
 from torchvision import transforms
 
-g_seed = 42
-
 # normalisation values determined in preprocessing, added here for re-use
 g_train_mean = 0.6063
 g_train_std = 0.1950
@@ -79,6 +77,7 @@ def MyTransform(
     - tr_mean normalisation value gets the mean value found in the preprocessing step as a default
     - tr_std normalisation value gets the std value found in the preprocessing step as a default
     - centercrop: provide a non-zero value if you need this transform (for transferlearning)
+    - seed: optional int; if set, seeds PyTorch's RNG so the augmentation sequence is reproducible across runs
     """
     steps = [
         transforms.Grayscale(num_output_channels=channels),
