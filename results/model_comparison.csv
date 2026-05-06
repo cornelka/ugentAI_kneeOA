@@ -1,4 +1,4 @@
-timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accuracy,precision,threshold
+timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accuracy,precision,threshold,weight_decay
 2026-05-02 15:13,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -29,7 +29,7 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.5, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.5,0.9994,0.98,0.98,0.9863,0.98,0.5
+)",628321,0.001,0.5,0.9994,0.98,0.98,0.9863,0.98,0.5,
 2026-05-02 15:13,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -60,7 +60,7 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.5, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.5,0.9954,0.98,0.9245,0.9452,0.875,0.5
+)",628321,0.001,0.5,0.9954,0.98,0.9245,0.9452,0.875,0.5,
 2026-05-02 17:45,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -91,7 +91,7 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.5, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.5,0.999,0.96,0.9697,0.9795,0.9796,0.5
+)",628321,0.001,0.5,0.999,0.96,0.9697,0.9795,0.9796,0.5,
 2026-05-02 17:45,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -122,8 +122,54 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.5, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.5,0.9935,0.96,0.9143,0.9384,0.8727,0.5
-2026-05-02 21:44,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
+)",628321,0.001,0.5,0.9935,0.96,0.9143,0.9384,0.8727,0.5,
+2026-05-03 14:25,BaselineCNN_32_64_2048,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 2048, kernel_size=(1, 1), stride=(1, 1))
+    (9): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",418625,0.001,0.3,0.9,0.88,0.7333,0.7808,0.6286,0.5,
+2026-05-03 14:25,BaselineCNN_32_64_2048,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 2048, kernel_size=(1, 1), stride=(1, 1))
+    (9): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",418625,0.001,0.3,0.8633,0.86,0.7288,0.7808,0.6324,0.5,
+2026-05-03 16:51,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
     (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -153,8 +199,8 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.3, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.3,0.9996,1.0,0.9804,0.9863,0.9615,0.5
-2026-05-02 21:44,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
+)",628321,0.001,0.3,0.9983,0.96,0.96,0.9726,0.96,0.5,0.0001
+2026-05-03 16:51,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
     (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -184,8 +230,8 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.3, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.3,0.9979,1.0,0.9524,0.9658,0.9091,0.5
-2026-05-03 09:02,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
+)",628321,0.001,0.3,0.9998,1.0,0.9804,0.9863,0.9615,0.5,0.0001
+2026-05-03 19:31,BaselineCNN_16_32_64_128_2048,Variant A (all data),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
     (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -215,8 +261,8 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.3, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.3,0.9988,0.98,0.98,0.9863,0.98,0.5
-2026-05-03 09:02,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
+)",628321,0.001,0.3,0.9983,0.96,0.96,0.9726,0.96,0.5,0.0001
+2026-05-03 19:31,BaselineCNN_16_32_64_128_2048,Variant B (no outliers),"BaselineCNN(
   (conv_block): Sequential(
     (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
     (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -246,4 +292,398 @@ timestamp,run_name,variant,architecture,num_params,lr,dropout,auc,recall,f1,accu
     (3): Dropout(p=0.3, inplace=False)
     (4): Linear(in_features=128, out_features=1, bias=True)
   )
-)",628321,0.001,0.3,0.9956,0.98,0.9423,0.9589,0.9074,0.5
+)",628321,0.001,0.3,0.9998,1.0,0.9804,0.9863,0.9615,0.5,0.0001
+2026-05-04 07:12,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9683,0.96,0.8727,0.9041,0.8,0.5,0.0001
+2026-05-04 07:12,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9546,0.96,0.8496,0.8836,0.7619,0.5,0.0001
+2026-05-04 07:33,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9523,0.96,0.8421,0.8767,0.75,0.5,0.0001
+2026-05-04 07:33,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9421,0.96,0.8136,0.8493,0.7059,0.5,0.0001
+2026-05-04 07:51,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9523,0.96,0.8421,0.8767,0.75,0.5,0.0001
+2026-05-04 07:51,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9421,0.96,0.8136,0.8493,0.7059,0.5,0.0001
+2026-05-04 09:48,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9654,0.92,0.8762,0.911,0.8364,0.5,0.0001
+2026-05-04 09:48,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.5,0.9573,0.96,0.8807,0.911,0.8136,0.5,0.0001
+2026-05-04 12:16,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9688,0.94,0.9126,0.9384,0.8868,0.5,0.0001
+2026-05-04 12:16,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9488,0.9,0.8491,0.8904,0.8036,0.5,0.0001
+2026-05-04 14:14,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9688,0.94,0.9126,0.9384,0.8868,0.5,0.0001
+2026-05-04 14:14,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9488,0.9,0.8491,0.8904,0.8036,0.5,0.0001
+2026-05-04 16:00,BaselineCNN_32_64_128,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9688,0.94,0.9126,0.9384,0.8868,0.5,0.0001
+2026-05-04 16:00,BaselineCNN_32_64_128,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (5): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): AdaptiveAvgPool2d(output_size=1)
+  )
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=128, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",109761,0.001,0.3,0.9488,0.9,0.8491,0.8904,0.8036,0.5,0.0001
+2026-05-05 22:06,BaselineCNN_64_128_256,Variant A (all data),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(64, 128, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (5): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(128, 256, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (9): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (proj): Sequential(
+    (0): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+  )
+  (pool): AdaptiveAvgPool2d(output_size=1)
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",1819777,0.0005,0.3,0.9983,1.0,0.9709,0.9795,0.9434,0.5,0.0001
+2026-05-05 22:06,BaselineCNN_64_128_256,Variant B (no outliers),"BaselineCNN(
+  (conv_block): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Conv2d(64, 128, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (5): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU()
+    (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (8): Conv2d(128, 256, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (9): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU()
+    (11): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (proj): Sequential(
+    (0): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+  )
+  (pool): AdaptiveAvgPool2d(output_size=1)
+  (fc_block): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=128, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.3, inplace=False)
+    (4): Linear(in_features=128, out_features=1, bias=True)
+  )
+)",1819777,0.0005,0.3,0.9965,0.98,0.9423,0.9589,0.9074,0.5,0.0001
