@@ -21,11 +21,11 @@ assignment_details/    # PDF and slides for the assignment
 ## Project packages
 | Allowed | Used | Package | Purpose |
 |---------|------|---------|---------|
-| N | Y | os | Standard library — environment variables, file system paths |
-| N | Y | sys | Standard library — Python interpreter interaction, sys.path manipulation |
-| N | Y | pathlib | Standard library — object-oriented filesystem paths |
-| N | Y | itertools | Standard library — iterator utilities (confusion matrix plotting) |
-| N | Y | datetime | Standard library — timestamps for experiment logging |
+| * | Y | os | Standard library — environment variables, file system paths |
+| * | Y | sys | Standard library — Python interpreter interaction, sys.path manipulation |
+| * | Y | pathlib | Standard library — object-oriented filesystem paths |
+| * | Y | itertools | Standard library — iterator utilities (confusion matrix plotting) |
+| * | Y | datetime | Standard library — timestamps for experiment logging |
 | Y | Y | numpy | Numerical computing — arrays, matrix operations, math functions |
 | Y | Y | pandas | Data manipulation — DataFrames, loading/cleaning tabular data (CSV, Excel) |
 | Y | Y | matplotlib | Low-level plotting library — line charts, histograms, custom visualizations |
@@ -40,8 +40,6 @@ assignment_details/    # PDF and slides for the assignment
 | Y | N | tensorboard | Visualization tool for TensorFlow/PyTorch training — loss curves, metrics dashboards |
 | N | Y | torchvision | PyTorch image utilities — dataset loaders, transforms, pretrained models |
 | N | Y | grad-cam | Gradient/score-based saliency maps for CNNs — GradCAM and ScoreCAM |
-| N | Y | keras | High-level deep learning API (v3, backend-agnostic) — used for GPU verification |
-| N | Y | tensorflow | Keras backend used in this environment |
 
 ## Workflow & Task Dependencies
 

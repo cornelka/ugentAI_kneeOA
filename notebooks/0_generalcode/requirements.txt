@@ -10,11 +10,6 @@
 torch==2.10.0+cu126
 torchvision==0.25.0+cu126
 
-# Keras (standalone v3) + TensorFlow backend
-# Used by gpu_helper.py to verify GPU availability via Keras
-keras==3.13.2
-tensorflow==2.20.0
-
 # Explainability
 grad-cam==1.5.5
 
