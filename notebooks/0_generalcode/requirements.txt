@@ -1,21 +1,31 @@
-# extra
-#os
-#sys
-#pathlib
+# ------------------------------------------------------------
+# Project: ugentAI_kneeOA
+# Python environment: ai-course (conda)
+# Generated from import audit of all notebooks + helper files
+# ------------------------------------------------------------
 
-# used
-torch
-scikeras
-Pillow
-pandas
-matplotlib
-tensorflow
+# Deep learning — PyTorch (CUDA 12.6 build)
+# CPU-only alternative: pip install torch torchvision
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.10.0+cu126
+torchvision==0.25.0+cu126
 
-#unused
-numpy
-seaborn
-scikit-learn
-scipy
-imbalanced-learn
-requests
-tensorboard
+# Keras (standalone v3) + TensorFlow backend
+# Used by gpu_helper.py to verify GPU availability via Keras
+keras==3.13.2
+tensorflow==2.20.0
+
+# Explainability
+grad-cam==1.5.5
+
+# Data / numerics
+numpy==2.4.2
+pandas==3.0.1
+scipy==1.17.1
+
+# Visualisation
+matplotlib==3.10.8
+Pillow==12.1.1
+
+# Machine learning utilities
+scikit-learn==1.8.0

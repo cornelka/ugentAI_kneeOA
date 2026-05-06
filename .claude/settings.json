@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"c:\\\\_data\\\\soluco\\\\training\\\\ugent\\\\AI\\\\project\\\\ugentAI_kneeOA\\\\notebooks\" -File -Recurse | Where-Object {$_.Extension -eq \".ipynb\"} | Select-Object FullName)",
+      "PowerShell($path = \"c:\\\\_data\\\\soluco\\\\training\\\\ugent\\\\AI\\\\project\\\\ugentAI_kneeOA\\\\notebooks\"; Get-ChildItem -Path $path -Directory | ForEach-Object { Write-Host \"Folder: $_\"; Get-ChildItem -Path $_.FullName -File | Select-Object Name })",
+      "Bash(python3)",
+      "Bash(pip show *)",
+      "Bash(conda run *)",
+      "Bash(C:/Users/Karel/.conda/envs/ai-course/python.exe -m pip list)"
+    ]
+  }
+}
